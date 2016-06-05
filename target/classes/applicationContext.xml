@@ -1,12 +1,28 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
-	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<context:annotation-config />
+
+	<context:component-scan base-package="com.tija.springtemplate.l9EventHAndling" />
+
+	<!--6 registering BeanPostProcessor -->
+	<bean class="com.tija.springtemplate.l6BeanPostProcessor.MyBeanPostProcessor"></bean>
+
+	<!--7 registering MyBeanFactoryPostProcessor -->
+	<bean
+		class="com.tija.springtemplate.l7BeanFactoryPostProcessor.MyBeanFactoryPostProcessor">
+	</bean>
+	<!--7 registering predefined BeanFactoryPostProcessor with placeholders-->
+	<context:property-placeholder location="classpath:beans.properties" />
 
 	<!--1 Bean Property Initialization :: Setter Injection -->
 	<bean id="integral" name="integral"
 		class="com.tija.springtemplate.l1setterInjection.Integral">
-		<property name="type" value="indefinite"></property>
+		<property name="type" value="${integral.type}"></property>
 	</bean>
 	<!--1 Bean Property Initialization :: Setter Injection -->
 
@@ -26,13 +42,13 @@
 		<constructor-arg name="childTheorem" ref="theorem2" />
 	</bean>
 	<bean name="theorem1" class="com.tija.springtemplate.l3injectingObjects.AlgTheorem">
-		<property name="name" value="First Theorem"></property>
-		<property name="text" value="First Theorem text."></property>
+		<property name="name" value="${theorem2.name}"></property>
+		<property name="text" value="${theorem1.text}"></property>
 	</bean>
 
 	<bean name="theorem2" class="com.tija.springtemplate.l3injectingObjects.AlgTheorem">
-		<property name="name" value="Second Theorem"></property>
-		<property name="text" value="Second Theorem text."></property>
+		<property name="name" value="${theorem2.name}"></property>
+		<property name="text" value="${theorem2.text}"></property>
 	</bean>
 	<!--3 Bean Injecting Objects -->
 
@@ -57,26 +73,30 @@
 	<!--4 Inner Bean -->
 
 	<!--5 Initializing Collections -->
-	<bean name="mathematics" class="com.tija.springtemplate.l5InitializingCollections.Mathematics">
-		<constructor-arg type="java.lang.String" value="Mathematics rules." />
-		<constructor-arg name="subjects" >
-		<list>
-			<ref bean="subject1"/>
-			<ref bean="subject2"/>
-		</list>		
+	<bean name="mathematics"
+		class="com.tija.springtemplate.l5InitializingCollections.Mathematics">
+		<constructor-arg type="java.lang.String" value="Mathematics after coding." />
+		<constructor-arg name="subjects">
+			<list>
+				<ref bean="subject1" />
+				<ref bean="subject2" />
+			</list>
 		</constructor-arg>
-		
+
 	</bean>
-	<bean name="subject1" class="com.tija.springtemplate.l5InitializingCollections.MathSubject">
-		<property name="name" value="Probability"></property>
-		<property name="text" value="Probability course"></property>
+	<bean name="subject1"
+		class="com.tija.springtemplate.l5InitializingCollections.MathSubject">
+		<property name="name" value="${subject1.one}"></property>
+		<property name="text" value="${subject1.one}"></property>
 	</bean>
 
-	<bean name="subject2" class="com.tija.springtemplate.l5InitializingCollections.MathSubject">
-		<property name="name" value="Statistics"></property>
-		<property name="text" value="Statistics course"></property>
+	<bean name="subject2"
+		class="com.tija.springtemplate.l5InitializingCollections.MathSubject">
+		<property name="name" value="${subject2.one}"></property>
+		<property name="text" value="${subject2.two}"></property>
 	</bean>
 	<!--5 Initializing Collections -->
+
 
 
 </beans>

@@ -1,19 +1,18 @@
 package com.tija.springtemplate.l3injectingObjects;
 
-public class Algebra {
-	
+import com.tija.springtemplate.l8CodingToInterfaces.Subject;
+
+public class Algebra implements Subject {
+
 	String name;
 	AlgTheorem theorem;
 	AlgTheorem childTheorem;
-	
-	
 
 	public Algebra(String name) {
 		super();
 		this.name = name;
 	}
 
-	
 	public Algebra(String name, AlgTheorem theorem, AlgTheorem childTheorem) {
 		this.name = name;
 		this.theorem = theorem;
@@ -35,7 +34,7 @@ public class Algebra {
 	public void setTheorem(AlgTheorem theorem) {
 		this.theorem = theorem;
 	}
-	
+
 	public AlgTheorem getChildTheorem() {
 		return childTheorem;
 	}
@@ -44,8 +43,11 @@ public class Algebra {
 		this.childTheorem = childTheorem;
 	}
 
-	public void printAlgebra(){
-		System.out.println("Inside algebra: " + getName()+ " theorem: " +getTheorem().getName() +" childTheorem: " + getChildTheorem().getName());
+	// prints Algebra
+	@Override
+	public void calculate() {
+		System.out.println("Inside algebra: " + getName() + " theorem: " + getTheorem().getName() + " childTheorem: "
+				+ getChildTheorem().getName());
 	}
 
 }

@@ -6,11 +6,12 @@ import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
-public class Mathematics implements ApplicationContextAware{
+import com.tija.springtemplate.l8CodingToInterfaces.Subject;
+
+public class Mathematics implements Subject, ApplicationContextAware {
 	ApplicationContext aplicationContext;
 	private String name;
 	private List<MathSubject> subjects;
-
 
 	public Mathematics() {
 		super();
@@ -19,7 +20,7 @@ public class Mathematics implements ApplicationContextAware{
 	public Mathematics(String name, List<MathSubject> subjects) {
 		super();
 		this.name = name;
-		this.subjects=subjects;
+		this.subjects = subjects;
 	}
 
 	public String getName() {
@@ -30,8 +31,6 @@ public class Mathematics implements ApplicationContextAware{
 		this.name = name;
 	}
 
-
-
 	public List<MathSubject> getSubjects() {
 		return subjects;
 	}
@@ -40,16 +39,17 @@ public class Mathematics implements ApplicationContextAware{
 		this.subjects = subjects;
 	}
 
-	public void printMAthematics() {
-		for (MathSubject subject: subjects){
-		System.out.println("Inside calculus: " + getName() + " theorem: " + subject.getName());
+	// print Mathematics
+	@Override
+	public void calculate() {
+		for (MathSubject subject : subjects) {
+			System.out.println("Inside calculus: " + getName() + " theorem: " + subject.getName());
 		}
 	}
 
 	@Override
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-		this.aplicationContext= applicationContext;
-		
-	}
+		this.aplicationContext = applicationContext;
 
+	}
 }

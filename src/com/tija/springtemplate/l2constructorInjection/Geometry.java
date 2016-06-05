@@ -3,11 +3,13 @@
  */
 package com.tija.springtemplate.l2constructorInjection;
 
+import com.tija.springtemplate.l8CodingToInterfaces.Subject;
+
 /**
  * @author ttinana
  *
  */
-public class Geometry {
+public class Geometry implements Subject{
 	private String type;
 	private int favorite;
 
@@ -34,8 +36,9 @@ public class Geometry {
 	public int getFavorite() {
 		return favorite;
 	}
-
-	public void defineGeometry() {
+	
+	// define Geometry in calculate Method
+	public void calculate(){
 		System.out.println("Speciallyty ::" + getType() + ":: geometry." + getFavorite());
 	}
 

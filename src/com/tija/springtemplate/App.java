@@ -17,6 +17,7 @@ import com.tija.springtemplate.l2constructorInjection.Geometry;
 import com.tija.springtemplate.l3injectingObjects.Algebra;
 import com.tija.springtemplate.l4InnerBean.Calculus;
 import com.tija.springtemplate.l5InitializingCollections.Mathematics;
+import com.tija.springtemplate.l8CodingToInterfaces.Subject;
 
 /**
  * @author ttinana
@@ -32,29 +33,25 @@ public class App {
 		logger.info("starting App.");
 
 		try (AbstractApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml")) {
-			context.registerShutdownHook();
-			context.getBean("integral");
-
-			// AbstractApplicationContext context = new
-			// ClassPathXmlApplicationContext("applicationContext.xml");
-			// context.registerShutdownHook();
+			context.registerShutdownHook();			
 
 			// Bean Property Initialization :: Setter Injection
-			Integral integral = (Integral) context.getBean("integral");
-			integral.calculate();
+			Subject subject = (Subject) context.getBean("integral");
+			subject.calculate();
 
 			// Bean Property Initialization :: Constructor Injection
-			Geometry geometry = (Geometry) context.getBean("geometry");
-			geometry.defineGeometry();
+			Subject subject1 = (Subject) context.getBean("geometry");
+			subject1.calculate();
 
-			Algebra algebra = (Algebra) context.getBean("algebra");
-			algebra.printAlgebra();
+			Subject subject2 = (Subject) context.getBean("algebra");
+			subject2.calculate();
 
-			Calculus calculus = (Calculus) context.getBean("calculusAlias");
-			calculus.printCalculus();
+			Subject subject3 = (Subject) context.getBean("calculusAlias");
+			subject3.calculate();
 
-			Mathematics mathematics = (Mathematics) context.getBean("mathematics");
-			mathematics.printMAthematics();
+			Subject subjectMain = (Subject) context.getBean("mathematics");
+			subjectMain.calculate();
+			
 		} catch (BeansException e) {
 			logger.error("|ERROR|   ClassPathXmlApplicationContext(applicationContext.xml) unreachable " + e);
 		}

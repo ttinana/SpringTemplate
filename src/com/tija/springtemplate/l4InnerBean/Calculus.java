@@ -1,6 +1,8 @@
 package com.tija.springtemplate.l4InnerBean;
 
-public class Calculus {
+import com.tija.springtemplate.l8CodingToInterfaces.Subject;
+
+public class Calculus implements Subject{
 	
 	String name;
 	CalculusTheorem theorem;
@@ -30,7 +32,9 @@ public class Calculus {
 		this.childTheorem = childTheorem;
 	}
 	
-	public void printCalculus(){
+	// prints Calculus
+	@Override
+	public void calculate() {
 		System.out.println("Inside calculus: " + getName()+ " theorem: " +getTheorem().getName() +" childTheorem: " + getChildTheorem().getName());
 	}
 
