@@ -1,0 +1,82 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<!--1 Bean Property Initialization :: Setter Injection -->
+	<bean id="integral" name="integral"
+		class="com.tija.springtemplate.l1setterInjection.Integral">
+		<property name="type" value="indefinite"></property>
+	</bean>
+	<!--1 Bean Property Initialization :: Setter Injection -->
+
+	<!--2 Bean Property Initialization :: Constructor Injection -->
+	<bean id="geometry" name="geometry"
+		class="com.tija.springtemplate.l2constructorInjection.Geometry">
+		<constructor-arg type="java.lang.String" index="0"
+			value="Euclid" />
+		<constructor-arg type="int" index="1" value="10" />
+	</bean>
+	<!--2 Bean Property Initialization :: Constructor Injection -->
+
+	<!--3 Bean Injecting Objects -->
+	<bean name="algebra" class="com.tija.springtemplate.l3injectingObjects.Algebra">
+		<constructor-arg type="java.lang.String" value="Osnovna teorema algebre" />
+		<constructor-arg name="theorem" ref="theorem1" />
+		<constructor-arg name="childTheorem" ref="theorem2" />
+	</bean>
+	<bean name="theorem1" class="com.tija.springtemplate.l3injectingObjects.AlgTheorem">
+		<property name="name" value="First Theorem"></property>
+		<property name="text" value="First Theorem text."></property>
+	</bean>
+
+	<bean name="theorem2" class="com.tija.springtemplate.l3injectingObjects.AlgTheorem">
+		<property name="name" value="Second Theorem"></property>
+		<property name="text" value="Second Theorem text."></property>
+	</bean>
+	<!--3 Bean Injecting Objects -->
+
+	<!--4 Inner Bean -->
+
+	<bean name="calculus" class="com.tija.springtemplate.l4InnerBean.Calculus">
+		<constructor-arg type="java.lang.String" value="Odredjen integral" />
+		<constructor-arg name="theorem">
+			<bean class="com.tija.springtemplate.l4InnerBean.CalculusTheorem">
+				<property name="name" value="First Theorem"></property>
+				<property name="text" value="First Theorem text."></property>
+			</bean>
+		</constructor-arg>
+		<constructor-arg name="childTheorem">
+			<bean class="com.tija.springtemplate.l4InnerBean.CalculusTheorem">
+				<property name="name" value="Second Theorem"></property>
+				<property name="text" value="Second Theorem text."></property>
+			</bean>
+		</constructor-arg>
+	</bean>
+	<alias name="calculus" alias="calculusAlias" />
+	<!--4 Inner Bean -->
+
+	<!--5 Initializing Collections -->
+	<bean name="mathematics" class="com.tija.springtemplate.l5InitializingCollections.Mathematics">
+		<constructor-arg type="java.lang.String" value="Mathematics rules." />
+		<constructor-arg name="subjects" >
+		<list>
+			<ref bean="subject1"/>
+			<ref bean="subject2"/>
+		</list>		
+		</constructor-arg>
+		
+	</bean>
+	<bean name="subject1" class="com.tija.springtemplate.l5InitializingCollections.MathSubject">
+		<property name="name" value="Probability"></property>
+		<property name="text" value="Probability course"></property>
+	</bean>
+
+	<bean name="subject2" class="com.tija.springtemplate.l5InitializingCollections.MathSubject">
+		<property name="name" value="Statistics"></property>
+		<property name="text" value="Statistics course"></property>
+	</bean>
+	<!--5 Initializing Collections -->
+
+
+</beans>
