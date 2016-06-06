@@ -36,20 +36,20 @@ public class App {
 			context.registerShutdownHook();			
 
 			// Bean Property Initialization :: Setter Injection
-			Subject subject = (Subject) context.getBean("integral");
+			Subject subject = context.getBean("integral", Subject.class);
 			subject.calculate();
 
 			// Bean Property Initialization :: Constructor Injection
-			Subject subject1 = (Subject) context.getBean("geometry");
+			Subject subject1 = context.getBean("geometry", Subject.class);
 			subject1.calculate();
 
-			Subject subject2 = (Subject) context.getBean("algebra");
+			Subject subject2 = context.getBean("algebra", Subject.class);
 			subject2.calculate();
 
-			Subject subject3 = (Subject) context.getBean("calculusAlias");
+			Subject subject3 = context.getBean("calculusAlias", Subject.class);
 			subject3.calculate();
 
-			Subject subjectMain = (Subject) context.getBean("mathematics");
+			Subject subjectMain = context.getBean("mathematics", Subject.class);
 			subjectMain.calculate();
 			
 		} catch (BeansException e) {
