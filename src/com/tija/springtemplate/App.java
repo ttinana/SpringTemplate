@@ -12,6 +12,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.tija.aspectTemplate.SubjectService;
 import com.tija.springtemplate.l1setterInjection.Integral;
 import com.tija.springtemplate.l2constructorInjection.Geometry;
 import com.tija.springtemplate.l3injectingObjects.Algebra;
@@ -33,25 +34,33 @@ public class App {
 		logger.info("starting App.");
 
 		try (AbstractApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml")) {
-			context.registerShutdownHook();			
+			context.registerShutdownHook();
 
-			// Bean Property Initialization :: Setter Injection
+			// ********** ASPECT AOP *********************
+			SubjectService subjectService = context.getBean(SubjectService.class);
+			System.out.println(
+					"Shape service" + subjectService.getPoetry().getName() + subjectService.getPoetry().getNameAOP());
+			// ********** ASPECT AOP *********************
+
+			// 1. Bean Property Initialization :: Setter Injection
 			Subject subject = context.getBean("integral", Subject.class);
 			subject.calculate();
 
-			// Bean Property Initialization :: Constructor Injection
-			Subject subject1 = context.getBean("geometry", Subject.class);
-			subject1.calculate();
-
-			Subject subject2 = context.getBean("algebra", Subject.class);
-			subject2.calculate();
-
-			Subject subject3 = context.getBean("calculusAlias", Subject.class);
-			subject3.calculate();
+			/*
+			 * // Bean Property Initialization :: Constructor Injection Subject
+			 * subject1 = context.getBean("geometry", Subject.class);
+			 * subject1.calculate();
+			 * 
+			 * Subject subject2 = context.getBean("algebra", Subject.class);
+			 * subject2.calculate();
+			 * 
+			 * Subject subject3 = context.getBean("calculusAlias",
+			 * Subject.class); subject3.calculate();
+			 */
 
 			Subject subjectMain = context.getBean("mathematics", Subject.class);
 			subjectMain.calculate();
-			
+
 		} catch (BeansException e) {
 			logger.error("|ERROR|   ClassPathXmlApplicationContext(applicationContext.xml) unreachable " + e);
 		}

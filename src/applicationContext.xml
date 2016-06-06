@@ -1,14 +1,24 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
     http://www.springframework.org/schema/context
-    http://www.springframework.org/schema/context/spring-context-3.0.xsd">
-
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd
+    http://www.springframework.org/schema/aop 
+    http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+    ">
+  
 	<context:annotation-config />
 
 	<context:component-scan base-package="com.tija.springtemplate.l9EventHAndling" />
-
+	
+	<!-- ASPECT -->
+	<!-- http://docs.spring.io/spring/docs/current/spring-framework-reference/html/aop.html -->
+	<aop:aspectj-autoproxy/>
+	<bean name="loggingAspect" class="com.tija.aspectTemplate.aspect.LoggingAspect"></bean>
+	
 	<!--6 registering BeanPostProcessor -->
 	<bean class="com.tija.springtemplate.l6BeanPostProcessor.MyBeanPostProcessor"></bean>
 
@@ -96,6 +106,18 @@
 		<property name="text" value="${subject2.two}"></property>
 	</bean>
 	<!--5 Initializing Collections -->
+	
+	<!--********************************   AOP   ************************************* -->
+	<bean name="poetry" class="com.tija.aspectTemplate.Poetry">
+	<property name="name" value="Poe"></property>
+	</bean>
+	
+	<bean name="proze" class="com.tija.aspectTemplate.Proze">
+	<property name="name" value="Kafka"></property>
+	</bean>
+	
+	<bean name="subjectService" class="com.tija.aspectTemplate.SubjectService" autowire="byName"/>
+
 
 
 
